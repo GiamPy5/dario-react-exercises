@@ -9,12 +9,11 @@ class ProductsList extends React.Component
 
     constructor (props) {
         super(props)
-
-        console.log(this.state.selectedProducts);
     }
 
     updateSelectedProduct(id, selected) {
         let selectedProducts = this.state.selectedProducts;
+        const that = this;
 
         if (selected) {
             selectedProducts.push(id);
@@ -23,9 +22,7 @@ class ProductsList extends React.Component
             selectedProducts = selectedProducts.filter((productId) => productId !== id);
         }
 
-        this.setState({ selectedProducts: selectedProducts }, function () {
-            console.log(this.state.selectedProducts);
-        })
+        this.setState({ selectedProducts: selectedProducts })
     }
 
     render () {
@@ -38,6 +35,8 @@ class ProductsList extends React.Component
                         <Product onCheckboxClick={(id, selected) => this.updateSelectedProduct(id, selected)} id={product.id} name={product.name}  /> 
                     </div>
                 ))}
+
+                <button type="button" onClick={() => this.props.basketAdder(this.state.selectedProducts)}>Add To Basket</button>
             </div>
         )
     }
