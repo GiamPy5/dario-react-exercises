@@ -7,13 +7,8 @@ class ProductsList extends React.Component
         selectedProducts: []
     }
 
-    constructor (props) {
-        super(props)
-    }
-
     updateSelectedProduct(id, selected) {
         let selectedProducts = this.state.selectedProducts;
-        const that = this;
 
         if (selected) {
             selectedProducts.push(id);
@@ -32,11 +27,18 @@ class ProductsList extends React.Component
             <div>
                 {products.map((product) => (
                     <div key={product.id}>
-                        <Product onCheckboxClick={(id, selected) => this.updateSelectedProduct(id, selected)} id={product.id} name={product.name}  /> 
+                        <Product 
+                            onCheckboxClick={(id, selected) => this.updateSelectedProduct(id, selected)} 
+                            id={product.id} 
+                            name={product.name}  
+                        /> 
                     </div>
                 ))}
 
-                <button type="button" onClick={() => this.props.basketAdder(this.state.selectedProducts)}>Add To Basket</button>
+                <button 
+                    type="button" 
+                    onClick={() => this.props.basketAdder(this.state.selectedProducts)}
+                >Add To Basket</button>
             </div>
         )
     }

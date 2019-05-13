@@ -1,21 +1,21 @@
 import React from 'react'
-import ProductsList from '../Components/ProductsList.js'
+import ProductsTable from '../Components/ProductsTable.js'
 import { Link } from "react-router-dom";
+
+const PRODUCT_TYPE_FRUIT = "fruit"
+const PRODUCT_TYPE_VEGETABLE = "vegetable"
 
 class Shop extends React.Component
 {
     state = {
         products: [
-            { id: 1, name: "Mela", price: "1.00 €" },
-            { id: 2, name: "Pomodoro", price: "0.60 €" },
-            { id: 3, name: "Patata", price: "0.30 €" },
+            { id: 1, name: "Mela", price: "1.00 €", type: PRODUCT_TYPE_FRUIT },
+            { id: 2, name: "Pomodoro", price: "0.60 €", type: PRODUCT_TYPE_VEGETABLE },
+            { id: 3, name: "Patata", price: "0.30 €", type: PRODUCT_TYPE_VEGETABLE },
+            { id: 4, name: "Pesca", price: "0.60 €", type: PRODUCT_TYPE_FRUIT },
         ],
     
         basket: []
-    }
-
-    constructor (props) {
-        super(props)
     }
 
     addToBasket(ids) {
@@ -39,12 +39,17 @@ class Shop extends React.Component
             <div>
                 <h1>Prodotti</h1>
 
-                <ProductsList basketAdder={(ids) => this.addToBasket(ids)} products={this.state.products} />
+                <ProductsTable products={this.state.products} basketAdder={(ids) => this.addToBasket(ids)} />
             
                 <h5><Link to="/basket">Vai al carrello</Link></h5>
             </div>
         )
     }
+}
+
+export const PRODUCT_TYPES = {
+    PRODUCT_TYPE_FRUIT,
+    PRODUCT_TYPE_VEGETABLE
 }
 
 export default Shop;
